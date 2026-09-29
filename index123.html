@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لمعة | غسيل سيارات متنقل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f7;--card:#fff;--tx:#0f2233;--mu:#5d7183;--pr:#0a7cff;--bd:#dfe8ef;--ok:#12a150;--sel:#e8f2ff;--dk:#0c1a26;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141d;--card:#132330;--tx:#eaf2f8;--mu:#9bb0c1;--bd:#23394b;--sel:#12324f}}
+:root[data-theme="dark"]{--bg:#0b141d;--card:#132330;--tx:#eaf2f8;--mu:#9bb0c1;--bd:#23394b;--sel:#12324f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Tajawal',Tahoma,Arial,sans-serif;line-height:1.55}
+.app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--bg)}
+header{background:linear-gradient(160deg,#0c1a26,#0a4c8f);color:#fff;padding:16px 16px 22px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:22px}
+.top button{background:rgba(255,255,255,.18);color:#fff;border:0;padding:7px 13px;border-radius:18px;font-family:inherit;cursor:pointer}
+header h1{font-size:20px;margin:14px 0 2px}header p{margin:0;opacity:.85;font-size:14px}
+.pts{margin-top:12px;background:rgba(255,255,255,.14);border-radius:12px;padding:8px 12px;font-size:14px;display:flex;justify-content:space-between}
+.body{padding:14px 14px 110px}
+.steps{display:flex;gap:6px;margin-bottom:14px}
+.steps div{flex:1;text-align:center;font-size:12.5px;padding:7px 2px;border-radius:9px;background:var(--card);color:var(--mu);font-weight:500;border:1px solid var(--bd)}
+.steps .on{background:var(--pr);color:#fff;border-color:var(--pr)}.steps .dn{background:var(--ok);color:#fff;border-color:var(--ok)}
+h2{font-size:16px;margin:18px 0 8px}h2:first-child{margin-top:0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px}
+.opt{display:block;width:100%;border:2px solid var(--bd);border-radius:12px;padding:11px 12px;cursor:pointer;background:var(--card);text-align:right;font-family:inherit;color:var(--tx);font-size:15px;margin-bottom:8px;position:relative}
+.opt.sel{border-color:var(--pr);background:var(--sel)}
+.opt b{display:block}.opt small{color:var(--mu);display:block}.opt .p{color:var(--pr);font-weight:800;position:absolute;left:12px;top:11px}
+.tag{background:#ff4d6d;color:#fff;font-size:11px;border-radius:8px;padding:1px 7px;margin-right:6px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:0 0 auto;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:8px 14px;font-family:inherit;font-size:14px;cursor:pointer;text-align:center}
+.chip.sel{border-color:var(--pr);background:var(--sel)}.chip small{display:block;color:var(--mu);font-size:11px}
+.chip.day{min-width:74px;position:relative}.chip.day b{font-size:20px;display:block}
+.chip .pc{position:absolute;top:-6px;right:-4px;background:#ff4d6d;color:#fff;border-radius:8px;font-size:10px;padding:0 5px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slot{padding:9px 2px;border:2px solid var(--bd);border-radius:10px;text-align:center;cursor:pointer;background:var(--card);color:var(--tx);font-family:inherit;font-size:14px}
+.slot.sel{border-color:var(--pr);background:var(--sel)}.slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.in{width:100%;padding:11px;border:1.5px solid var(--bd);border-radius:10px;font-family:inherit;font-size:16px;background:var(--card);color:var(--tx);margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ck{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;font-size:15px}
+.ck input{width:22px;height:22px;accent-color:var(--pr);margin:0}
+.mapw{position:relative;height:340px;border-radius:14px;overflow:hidden;border:1px solid var(--bd);margin-top:10px;background:#e6edf2}
+canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.pin{z-index:1000;position:absolute;left:50%;top:50%;font-size:38px;transform:translate(-50%,-92%);pointer-events:none;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35))}
+.zm{position:absolute;left:10px;top:10px;display:flex;flex-direction:column;gap:6px}
+.zm button,.gps{background:var(--card);color:var(--tx);border:1px solid var(--bd);width:38px;height:38px;border-radius:10px;font-size:20px;cursor:pointer}
+.gps{z-index:1000;position:absolute;right:10px;top:10px;width:auto;padding:0 12px;font-size:14px;font-family:inherit}
+.zone{z-index:1000;position:absolute;bottom:26px;left:8px;right:8px;background:var(--card);border-radius:10px;padding:6px 10px;font-size:13px;text-align:center;border:1px solid var(--bd)}
+.bad{color:#e0364b;font-weight:700}.good{color:var(--ok);font-weight:700}
+.btn{background:#0c1a26;color:#fff;border:0;padding:14px;border-radius:12px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;width:100%}
+.btn.s{background:var(--pr);padding:10px;font-size:14px}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.g{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--card);border-top:1px solid var(--bd);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;align-items:center;z-index:5}
+.bar .tot{white-space:nowrap;font-weight:800;font-size:17px;line-height:1.2}.bar .tot small{display:block;font-weight:400;color:var(--mu);font-size:11px}
+.bar .btn{flex:1}
+.note{font-size:13px;color:var(--mu)}.warn{background:#fff6dc;color:#7a5a00;border-radius:10px;padding:10px;font-size:13px;margin-top:10px}
+.ln{display:flex;justify-content:space-between;padding:4px 0;font-size:14px}.ln.t{font-weight:800;font-size:17px;border-top:1px dashed var(--bd);margin-top:6px;padding-top:8px}
+.sar{font-size:.8em;opacity:.8}
+.ok{text-align:center}.ok .ic{width:68px;height:68px;border-radius:50%;background:var(--ok);color:#fff;font-size:36px;line-height:68px;margin:0 auto 8px}
+.del{float:left;background:none;border:0;color:#e0364b;cursor:pointer;font-size:13px;font-family:inherit}
+.van{font-size:22px;text-align:center;line-height:24px}
+.thumb{width:64px;height:64px;object-fit:cover;border-radius:10px;margin-top:8px}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="top"><div class="logo">🚐 لمعة</div><button onclick="S.view=S.view?null:'bk';S.done=null;render()">حجوزاتي</button></div>
+<h1 id="hi"></h1><p>غسيل احترافي يجيك لين باب بيتك أو مقر عملك</p>
+<div class="pts"><span>⭐ نقاطك: <b id="pt">0</b></span><span>كل ١ ر.س = نقطة</span></div>
+</header>
+<div class="body" id="box"></div>
+<div class="bar" id="bar"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem('lm_'+k));return v??d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem('lm_'+k,JSON.stringify(v))}catch(e){}};
+const SV=[
+{id:'q',n:'غسيل سريع (خارجي)',d:'رغوة + شطف + تنشيف بالميكروفايبر',p:40,t:'٢٥ دقيقة'},
+{id:'sg',n:'غسيل سقنيتشر احترافي',d:'داخلي وخارجي + شفط + تلميع التابلوه',p:90,t:'٥٠ دقيقة',tag:'الأكثر طلباً'},
+{id:'fl',n:'الشامل + واكس',d:'غسيل كامل + واكس حماية + تلميع الكفرات',p:150,t:'ساعة ونص'},
+{id:'st',n:'تنظيف مقاعد بالبخار',d:'إزالة البقع والروائح',p:220,t:'ساعتين'},
+{id:'cr',n:'تلميع سيراميك',d:'حماية تدوم ٦ أشهر',p:480,t:'٣ ساعات'}];
+const SZ=[{n:'سيدان / صغيرة',m:1},{n:'دفع رباعي متوسط',m:1.3},{n:'دفع رباعي كبير',m:1.5}];
+const BRANDS=['تويوتا','هيونداي','نيسان','فورد','شيفروليه','كيا','لكزس','مرسيدس','بي إم دبليو','بيجو','جي إم سي','أخرى'];
+const COLS=['أبيض','أسود','فضي','رمادي','أزرق','أحمر','ذهبي'];
+const PAY=['Apple Pay','مدى / فيزا','STC Pay','المحفظة'];
+const DN=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+// خريطة تخطيطية للرياض (كم)
+const DIST=[['العليا',.5,.5],['الملز',4.5,1.5],['السليمانية',0,3],['الورود',-1,-1.5],['النخيل',-3,-4.5],['الربيع',3,-4.2],['الصحافة',5.5,-6.5],['حطين',-4,-7],['الملقا',1.5,-8],['الياسمين',-1,-9.8],['النرجس',-2,-11.5],['العارض',1.5,-13],['قرطبة',7,-1],['الرحمانية',-3,-1],['الغدير',3.5,-9.5]];
+const RD=[['طريق الملك فهد',[[-.5,-15],[-.5,5]]],['طريق الملك عبدالله',[[-8,-4],[9,-4]]],['طريق أنس بن مالك',[[-8,-8.5],[9,-8.5]]],['طريق الملك عبدالعزيز',[[4,-15],[4,5]]],['الطريق الدائري الشمالي',[[-8,-11],[9,-11]]],['شارع العليا',[[-8,.5],[9,.5]]],['طريق عثمان بن عفان',[[-4,-15],[-4,5]]]];
+const PARKS=[[-2.5,-6.5,1.6,1.2],[5,-2.5,1.8,1.5],[1,-12,2,1.4],[-6,-1,1.5,1.5]];
+const VANS=[[1,-5],[-2,-6.5],[3,-7],[-3,-2],[5,-5],[0,-9.5],[2.5,-2],[-5,-8]];
+const S={step:1,view:null,sv:null,car:0,cars:ld('cars',[{b:'تويوتا',m:'كامري',c:'أبيض',z:0,pl:'أ ب ج 1234'}]),locs:ld('locs',[]),cur:null,pos:{x:0.5,y:-3.4},z:30,dnote:'',lname:'',addCar:false,date:1,time:null,al:{re:false,ex:false},pf:{tire:false,perf:false},note:'',photo:null,coupon:'',cpOk:false,pay:'Apple Pay',done:null,pts:ld('pts',0)};
+const inZone=p=>(p.x/11)**2+((p.y+6)/10)**2<=1;
+function near(p){return p.a||S.cur||{d:'الرياض',r:'الطريق العام'}}
+function days(){const o=[],n=new Date();for(let i=0;i<7;i++){const d=new Date(n);d.setDate(n.getDate()+i);o.push(d)}return o}
+function taken(di,h){const d=days()[di];if(di===0&&h<=new Date().getHours())return true;if(d.getDay()===5&&h<13)return true;return (d.getDate()*7+h*13+di*5)%10<3}
+const promo=i=>i===1||i===2;
+function calc(){const s=SV.find(x=>x.id===S.sv),c=S.cars[S.car];if(!s||!c)return null;
+ const base=s.p*SZ[c.z].m,rate=Math.max(promo(S.date)?.1:0,S.cpOk?.15:0),disc=base*rate,total=base-disc;
+ return{s,c,base,rate,disc,total,vat:total-total/1.15}}
+const M=n=>`${(Math.round(n*100)/100).toFixed(2)} <span class="sar">ر.س</span>`;
+const t12=h=>`${h>12?h-12:h}:00 ${h>=12?'م':'ص'}`;
+const stepsBar=()=>`<div class="steps">${['الخدمة والسيارة','الموقع','الموعد والدفع'].map((t,i)=>`<div class="${S.step===i+1?'on':S.step>i+1?'dn':''}">${i+1}. ${t}</div>`).join('')}</div>`;
+
+function render(){
+ const h=new Date().getHours();$('hi').textContent=(h<12?'صباح الخير':'مساء الخير')+' 👋';$('pt').textContent=S.pts;
+ const b=$('box');
+ if(S.view==='bk'){const a=ld('bk',[]);b.innerHTML='<h2>حجوزاتي</h2>'+(a.length?a.map(k=>`<div class="card" style="margin-bottom:8px"><b>${k.id}</b> • ${esc(k.sv)}<br><span class="note">${k.when} — ${esc(k.loc)}</span><div class="ln t"><span>الإجمالي</span><span>${M(k.total)}</span></div></div>`).join(''):'<p class="note">ما عندك حجوزات محفوظة بعد.</p>');bar('');return}
+ if(S.done){b.innerHTML=doneHtml();bar('');return}
+ if(S.step===1)step1(b);else if(S.step===2)step2(b);else step3(b);
+ bar();
+}
+function step1(b){
+ b.innerHTML=stepsBar()+`<h2>اختر الخدمة</h2>${SV.map(s=>`<button class="opt ${S.sv===s.id?'sel':''}" onclick="S.sv='${s.id}';render()"><b>${s.n}${s.tag?`<span class="tag">${s.tag}</span>`:''}</b><small>${s.d}</small><small>⏱ ${s.t}</small><span class="p">${s.p} ر.س</span></button>`).join('')}
+ <h2>اختر سيارتك</h2>${S.cars.map((c,i)=>`<button class="opt ${S.car===i?'sel':''}" onclick="S.car=${i};render()"><b>🚗 ${esc(c.b)} ${esc(c.m)}</b><small>${c.c} • ${SZ[c.z].n} • ${esc(c.pl||'بدون لوحة')}</small></button>`).join('')}
+ ${S.addCar?`<div class="card"><b>إضافة سيارة</b><div class="two"><select class="in" id="cb">${BRANDS.map(x=>`<option>${x}</option>`).join('')}</select><input class="in" id="cm" placeholder="الموديل (مثال: كامري)"></div>
+ <div class="two"><select class="in" id="cc">${COLS.map(x=>`<option>${x}</option>`).join('')}</select><select class="in" id="cz">${SZ.map((x,i)=>`<option value="${i}">${x.n}</option>`).join('')}</select></div>
+ <input class="in" id="cp" placeholder="رقم اللوحة (مثال: ر ح ع 1500)"><div class="two" style="margin-top:8px"><button class="btn s" onclick="addCar()">حفظ السيارة</button><button class="btn s g" onclick="S.addCar=false;render()">إلغاء</button></div></div>`:`<button class="btn s g" onclick="S.addCar=true;render()">+ إضافة سيارة</button>`}`;
+}
+function addCar(){const m=$('cm').value.trim();if(m.length<2){$('cm').style.borderColor='#e0364b';return}
+ S.cars.push({b:$('cb').value,m,c:$('cc').value,z:+$('cz').value,pl:$('cp').value.trim()});S.car=S.cars.length-1;S.addCar=false;sv('cars',S.cars);render()}
+function step2(b){
+ const hs=S.locs.find(l=>l.id==='home'),ws=S.locs.find(l=>l.id==='work'),ot=S.locs.filter(l=>l.id[0]==='o');
+ const chip=(l,id,nm,ic)=>`<button class="chip ${l&&Math.hypot(l.x-S.pos.x,l.y-S.pos.y)<.03?'sel':''}" onclick="goLoc('${l?l.id:id}')">${ic} ${nm}<small>${l?esc(near(l).d):'غير محفوظ'}</small></button>`;
+ b.innerHTML=stepsBar()+`<h2>اختر موقع سيارتك</h2><div class="chips">${chip(hs,'home','بيت','🏠')}${chip(ws,'work','العمل','🏢')}${ot.map(l=>chip(l,l.id,esc(l.name),'📍')).join('')}</div>
+ <div class="mapw"><div id="map" style="width:100%;height:100%"></div><div class="pin">📍</div><button class="gps" onclick="gps()">🎯 موقعي</button><div class="zone" id="zone"></div></div>
+ <p class="note" id="hint" style="margin:6px 0 0">حرّك الخريطة لتضع الدبوس على مكان سيارتك بالضبط.</p>
+ <div class="card" style="margin-top:10px"><b id="addr"></b>
+ <input class="in" id="dn" placeholder="وصف إضافي (مثال: أمام بوابة المبنى، السيارة في الباركنج)" value="${esc(S.dnote)}" oninput="S.dnote=this.value">
+ <input class="in" id="ln" placeholder="اسم للموقع لو تبي تحفظه (مثال: بيت أهلي)" value="${esc(S.lname)}" oninput="S.lname=this.value">
+ <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><button class="btn s g" onclick="saveLoc('home')">🏠 حفظ كبيت</button><button class="btn s g" onclick="saveLoc('work')">🏢 حفظ كعمل</button><button class="btn s g" onclick="saveLoc('other')">📍 حفظ باسم</button></div></div>`;
+ initMap();
+}
+function goLoc(id){const l=S.locs.find(x=>x.id===id);
+ if(!l){$('hint').innerHTML='<b>حرّك الخريطة لموقع '+(id==='home'?'بيتك':'عملك')+' ثم اضغط "حفظ".</b>';return}
+ S.pos={x:l.x,y:l.y};S.dnote=l.d||'';render()}
+function saveLoc(k){if(!inZone(S.pos)){alert('هذا الموقع خارج نطاق التغطية حالياً');return}
+ const nm=k==='home'?'بيت':k==='work'?'العمل':(S.lname.trim()||'موقع محفوظ'),id=k==='other'?'o'+Date.now():k;
+ S.locs=S.locs.filter(l=>l.id!==id);S.locs.push({id,name:nm,x:S.pos.x,y:S.pos.y,d:S.dnote,a:S.cur});sv('locs',S.locs);S.lname='';render()}
+// الخريطة (Leaflet + OpenStreetMap)
+let map,gT;
+const LL=p=>[24.69-p.y/111,46.68+p.x/101],XY=(la,ln)=>({x:(ln-46.68)*101,y:-(la-24.69)*111});
+function initMap(){
+ if(typeof L==='undefined'){$('map').innerHTML='<p class="note" style="padding:20px">تعذّر تحميل الخريطة، تأكد من الاتصال بالإنترنت.</p>';return}
+ try{map&&map.remove()}catch(e){}
+ map=L.map('map').setView(LL(S.pos),15);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+ const pts=[];for(let i=0;i<72;i++){const t=i/72*6.2832;pts.push(LL({x:11*Math.cos(t),y:-6+10*Math.sin(t)}))}
+ L.polygon(pts,{color:'#00b39a',weight:2,dashArray:'6 5',fillColor:'#00b39a',fillOpacity:.05,interactive:false}).addTo(map);
+ VANS.forEach(v=>L.marker(LL({x:v[0],y:v[1]}),{icon:L.divIcon({html:'🚐',className:'van',iconSize:[24,24]}),interactive:false,keyboard:false}).addTo(map));
+ map.on('move',()=>{const c=map.getCenter();Object.assign(S.pos,XY(c.lat,c.lng));upd()});
+ map.on('moveend',geo);
+ upd();geo()}
+function geo(){clearTimeout(gT);gT=setTimeout(async()=>{const c=map.getCenter();
+ try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=17&accept-language=ar&lat=${c.lat}&lon=${c.lng}`),a=(await r.json()).address||{};
+ S.cur={d:a.suburb||a.neighbourhood||a.city_district||a.quarter||a.city||'الرياض',r:a.road||a.pedestrian||'الطريق العام'};upd()}catch(e){}},600)}
+function gps(){if(!navigator.geolocation){$('hint').textContent='المتصفح لا يدعم تحديد الموقع';return}
+ navigator.geolocation.getCurrentPosition(p=>{S.pos=XY(p.coords.latitude,p.coords.longitude);map.setView([p.coords.latitude,p.coords.longitude],17)},()=>{$('hint').textContent='تعذّر تحديد موقعك، فعّل صلاحية الموقع أو حرّك الخريطة يدوياً.'},{timeout:8000})}
+function upd(){const n=near(S.pos),ok=inZone(S.pos);
+ const vans=VANS.filter(v=>Math.hypot(v[0]-S.pos.x,v[1]-S.pos.y)<5).length;
+ if($('addr'))$('addr').textContent=`📍 ${n.d} — ${n.r}`;
+ if($('zone'))$('zone').innerHTML=ok?`<span class="good">✓ ضمن نطاق الخدمة</span> • ${vans||1} فرق غسيل قريبة منك`:'<span class="bad">✕ خارج نطاق التغطية حالياً</span>';
+ bar()}
+function step3(b){
+ const D=days(),mo=D[S.date];
+ b.innerHTML=stepsBar()+`<h2>التاريخ: ${MN[mo.getMonth()]} ${mo.getFullYear()}</h2><div class="chips">${D.map((d,i)=>`<button class="chip day ${S.date===i?'sel':''}" onclick="S.date=${i};S.time=null;render()">${promo(i)?'<span class="pc">-10%</span>':''}<small>${i===0?'اليوم':i===1?'غداً':DN[d.getDay()]}</small><b>${d.getDate()}</b></button>`).join('')}</div>
+ <h2>الوقت</h2><div class="slots">${[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(h=>`<button class="slot ${S.time===h?'sel':''}" ${taken(S.date,h)?'disabled':''} onclick="S.time=${h};render()">${t12(h)}</button>`).join('')}</div>
+ ${D[S.date].getDay()===5?'<p class="note">الجمعة: المواعيد تبدأ بعد صلاة الجمعة.</p>':''}
+ <h2>تنبيهات الطوارئ <span style="color:#e0364b;font-size:13px;font-weight:400">(في حال عدم الرد على الهاتف)</span></h2>
+ <label class="ck"><input type="checkbox" ${S.al.re?'checked':''} onchange="S.al.re=this.checked"> جدولة حجزي من جديد</label>
+ <label class="ck"><input type="checkbox" ${S.al.ex?'checked':''} onchange="S.al.ex=this.checked"> غسيل من الخارج فقط</label>
+ <h2>تفضيلات الخدمة</h2>
+ <label class="ck"><input type="checkbox" ${S.pf.tire?'checked':''} onchange="S.pf.tire=this.checked"> لا أرغب بتلميع الكفرات</label>
+ <label class="ck"><input type="checkbox" ${S.pf.perf?'checked':''} onchange="S.pf.perf=this.checked"> لا أرغب بتعطير السيارة</label>
+ <h2>ملاحظاتك</h2><textarea class="in" id="nt" rows="2" placeholder="مثال: السيارة في الباركنج أو خلف المبنى، ويمكنك رفع صورة" oninput="S.note=this.value">${esc(S.note)}</textarea>
+ <label class="chip" style="display:inline-block;margin-top:8px;cursor:pointer">📷 إرفاق صورة<input type="file" accept="image/*" hidden onchange="pic(this)"></label>${S.photo?`<br><img class="thumb" src="${S.photo}" alt="">`:''}
+ <h2>كوبون الخصم</h2><div style="display:flex;gap:8px"><input class="in" style="margin:0" id="cp" placeholder="أدخل الكود (جرّب LAMAA15)" value="${esc(S.coupon)}" oninput="S.coupon=this.value"><button class="btn s" style="width:90px" onclick="cpn()">تطبيق</button></div>
+ <p class="note" id="cpm">${S.cpOk?'<span class="good">✓ تم تطبيق خصم 15%</span>':''}</p>
+ <h2>الدفع</h2><div class="chips">${PAY.map(p=>{const w=p==='المحفظة';return `<button class="chip ${S.pay===p?'sel':''}" ${w?'disabled style="opacity:.5"':''} onclick="S.pay='${p}';render()">${p}${w?'<small>0.00 ر.س</small>':''}</button>`}).join('')}</div>
+ <div class="warn">⚠️ من فضلك احتفظ بالأشياء الثمينة قبل عملية الغسيل.</div>`;
+}
+function cpn(){S.cpOk=S.coupon.trim().toUpperCase()==='LAMAA15';if(!S.cpOk)$('cpm').innerHTML='<span class="bad">الكود غير صحيح</span>';else render()}
+function pic(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{S.photo=r.result;render()};r.readAsDataURL(f)}
+function bar(x){const el=$('bar');if(x==='')return el.innerHTML='';
+ if(S.view||S.done){el.innerHTML='';return}
+ const c=calc(),st=S.step;
+ const ok=st===1?!!c:st===2?inZone(S.pos):S.time!==null;
+ const lbl=st===1?'التالي: الموقع ←':st===2?'تأكيد الموقع ←':`تأكيد الحجز — ${S.pay}`;
+ el.innerHTML=`${st>1?`<button class="btn g" style="flex:0 0 52px;padding:14px 0" onclick="S.step--;render()">→</button>`:''}<div class="tot"><small>الإجمالي شامل الضريبة</small>${c?M(c.total):'—'}</div><button class="btn" id="nx" ${ok?'':'disabled'} onclick="next()">${lbl}</button>`}
+function next(){if(S.step<3){S.step++;render();scrollTo(0,0)}else book()}
+function book(){const c=calc(),n=near(S.pos),D=days()[S.date];
+ const k={id:'LM-'+Math.floor(10000+Math.random()*89999),sv:c.s.n,car:`${c.c.b} ${c.c.m}`,total:c.total,when:`${DN[D.getDay()]} ${D.getDate()} ${MN[D.getMonth()]} • ${t12(S.time)}`,loc:`حي ${n.d} — قرب ${n.r}`+(S.dnote?` (${S.dnote})`:''),pay:S.pay};
+ S.done=k;S.pts+=Math.floor(c.total);sv('pts',S.pts);const a=ld('bk',[]);a.unshift(k);sv('bk',a.slice(0,10));render();scrollTo(0,0)}
+function doneHtml(){const k=S.done;return `<div class="ok"><div class="ic">✓</div><h2>تم تأكيد حجزك!</h2><p class="note">فريق الغسيل بيتواصل معك قبل الوصول بـ ١٥ دقيقة</p></div>
+ <div class="card"><div class="ln"><span>رقم الحجز</span><b>${k.id}</b></div><div class="ln"><span>الخدمة</span><span>${esc(k.sv)}</span></div><div class="ln"><span>السيارة</span><span>${esc(k.car)}</span></div><div class="ln"><span>الموعد</span><span>${k.when}</span></div><div class="ln"><span>الموقع</span><span style="text-align:left;max-width:60%">${esc(k.loc)}</span></div><div class="ln"><span>الدفع</span><span>${k.pay}</span></div><div class="ln t"><span>الإجمالي</span><span>${M(k.total)}</span></div></div>
+ <p class="note" style="text-align:center">🎁 كسبت ${Math.floor(k.total)} نقطة</p>
+ <button class="btn" onclick="Object.assign(S,{step:1,done:null,sv:null,time:null});render()">حجز جديد</button>`}
+render();
+</script>
+</body>
+</html>
